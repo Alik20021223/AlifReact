@@ -32,6 +32,7 @@ export const RecipeReducer = (
   state = initialState,
   action: PayloadAction<any>
 ) => {
+  console.log(action.type)
   switch (action.type) {
     case RECIPE_REMOVE:
       return reduceRemove(state, action);
