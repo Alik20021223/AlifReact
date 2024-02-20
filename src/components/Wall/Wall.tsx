@@ -1,13 +1,15 @@
 import React from 'react'
-import { shallowEqual, useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from 'react';
 import { recipeFail, recipeSuccess } from '../../store/actions';
-import { RecipesState } from '../../store/reducers/post';
+import { Recipe } from '../../store/reducers/post';
 
 const Wall = () => {
-    const {loading, data, error} = useSelector((state: RecipesState) => state, shallowEqual)
-    const url = 'https://65cf1e2ebdb50d5e5f5a8591.mockapi.io/api/blog/recept'
+    const posts = useSelector((state: { posts: Recipe[] }) => state?.posts)
     const dispatch = useDispatch()
+    const url = 'https://65cf1e2ebdb50d5e5f5a8591.mockapi.io/api/blog/recept'
+
+    console.log(posts);
 
     useEffect(() => {
         fetch(url).then((res) => {
@@ -24,12 +26,12 @@ const Wall = () => {
     }, [dispatch])
     return (
         <div>
-            {data.map((item) => (
-                <div key={item.id}>
-                    <p>{item.title}</p>
-                    <p>{item.description}</p>
-                    <p>{item.timeCook}</p>
-                    <p>{item.listProduct}</p>
+            {posts?.map((post: Recipe) => (
+                <div key={post.id}>
+                    <p>{post.title}</p>
+                    <p>{post.description}</p>
+                    <p>{post.timeCook}</p>
+                    <p>{post.listProduct}</p>
                 </div>
             ))}
         </div>

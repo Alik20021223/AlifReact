@@ -57,13 +57,6 @@ export const recipeSuccess = (items: []) => {
     }
 }
 
-export const editChange = (name, value) => {
-    return {
-        type: RECIPE_EDIT_CHANGE,
-        payload: {name, value},
-    }
-}
-
 export const editCancel = () => {
     return {
         type: RECIPE_EDIT_CANCEL,
