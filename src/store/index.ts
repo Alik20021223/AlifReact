@@ -1,12 +1,10 @@
-import { createStore } from "redux";
-import { rootReducer } from "./reducers/index";
+import { rootReducer } from "./reducers/index.js";
+import { configureStore } from "@reduxjs/toolkit";
 
-// Cast window to any to access __REDUX_DEVTOOLS_EXTENSION__
-const devToolsExtension = (window as any).__REDUX_DEVTOOLS_EXTENSION__;
 
-const store = createStore(
-  rootReducer,
-  devToolsExtension && devToolsExtension(),
-);
+export const store = configureStore({
+    reducer: rootReducer,
+})
 
-export default store;
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;
