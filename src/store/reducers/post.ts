@@ -13,6 +13,7 @@ export interface Recipe {
   listProduct: string;
   avatar: string;
   id: number;
+
 }
 
 export interface RecipesState {
@@ -47,16 +48,16 @@ export const RecipeReducer = (
   }
 };
 
-const reduceRecipeRequest = (
-  state: RecipesState,
-  action: PayloadAction<any>
-) => {
-  return {
-    ...state,
-    loading: true,
-    error: null,
-  };
-};
+// const reduceRecipeRequest = (
+//   state: RecipesState,
+//   action: PayloadAction<any>
+// ) => {
+//   return {
+//     ...state,
+//     loading: true,
+//     error: null,
+//   };
+// };
 
 const reduceRecipeSuccess = (
   state: RecipesState,
@@ -70,13 +71,13 @@ const reduceRecipeSuccess = (
   };
 };
 
-const reduceRecipeFail = (state: RecipesState, action: PayloadAction<any>) => {
-  return {
-    ...state,
-    loading: false,
-    error: action.payload.error,
-  };
-};
+// const reduceRecipeFail = (state: RecipesState, action: PayloadAction<any>) => {
+//   return {
+//     ...state,
+//     loading: false,
+//     error: action.payload.error,
+//   };
+// };
 
 const reduceRemove = (state: RecipesState, action: PayloadAction<any>) => {
   const { data } = state;
