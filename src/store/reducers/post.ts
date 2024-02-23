@@ -1,8 +1,6 @@
 import {
   RECIPE_REMOVE,
   RECIPE_SUCCESS,
-  RECIPE_FAIL,
-  RECIPE_REQUEST,
 } from "../actions";
 import { PayloadAction } from "@reduxjs/toolkit";
 
@@ -39,10 +37,6 @@ export const RecipeReducer = (
       return reduceRemove(state, action);
     case RECIPE_SUCCESS:
       return reduceRecipeSuccess(state, action);
-    case RECIPE_FAIL:
-      return reduceRecipeFail(state, action);
-    case RECIPE_REQUEST:
-      return reduceRecipeRequest(state, action);
     default:
       return state;
   }

@@ -1,17 +1,18 @@
 // postSlice.ts
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Recipe } from "../reducers/post";
 import axios from "axios";
+import { RecipesListProps } from "../../components/Recipes/RecipesList";
 
 const API_URL = "https://65cf1e2ebdb50d5e5f5a8591.mockapi.io/api/blog/recept";
+
 
 const postSlice = createSlice({
   name: "post",
   initialState: {
-    post: [] as Recipe[],
+    post: [] as RecipesListProps[],
   },
   reducers: {
-    setPost(state, action: PayloadAction<Recipe[]>) {
+    setPost(state, action: PayloadAction<RecipesListProps[]>) {
       state.post = action.payload;
     },
     removePost(state, action: PayloadAction<number>) {
@@ -24,7 +25,7 @@ const postSlice = createSlice({
           console.error("Error removing post on the backend:", error);
         });
     },
-    updatePost(state, action: PayloadAction<Recipe>) {
+    updatePost(state, action: PayloadAction<RecipesListProps>) {
       const updatedPost = action.payload;
       axios.put(`${API_URL}/${updatedPost.id}`, updatedPost)
         .then(() => {
@@ -36,7 +37,7 @@ const postSlice = createSlice({
           console.error("Error updating post on the backend:", error);
         });
     },
-    addPost(state, action: PayloadAction<Recipe>) {
+    addPost(state, action: PayloadAction<RecipesListProps>) {
       const newPost = action.payload;
       axios.post(API_URL, newPost)
         .then(() => {
