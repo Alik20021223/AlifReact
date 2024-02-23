@@ -5,6 +5,7 @@ import { Modal } from "../components/Modal"
 import { Button } from "../components/Button"
 import { Input } from "../components/Input"
 import { Textaria } from "../components/Textaria"
+import { NEW_API_URL } from "./HomePage"
 
 const initialStateRecipe: RecipesListProps = {
   name: '',
@@ -21,7 +22,7 @@ const AdminPage = () => {
   const [showChangeModal, setShowChangeModal] = useState<boolean>(false)
 
   useEffect(() => {
-    axios.get(`${process.env.REACT_APP_API}/recipes`)
+    axios.get(`${NEW_API_URL}/recipes`)
       .then(({ data }) => setRecipes(data))
   }, [])
 
@@ -32,9 +33,9 @@ const AdminPage = () => {
   };
 
   const handleCreateRecipe = () => {
-    axios.post(`${process.env.REACT_APP_API}/recipes`, recipe)
+    axios.post(`${NEW_API_URL}/recipes`, recipe)
       .then(() => {
-        axios.get(`${process.env.REACT_APP_API}/recipes`)
+        axios.get(`${NEW_API_URL}/recipes`)
           .then(({ data }) => {
             setRecipe(initialStateRecipe)
             setRecipes(data)
@@ -43,9 +44,9 @@ const AdminPage = () => {
   }
 
   const handleUpdatePost = () => {
-    axios.patch(`${process.env.REACT_APP_API}/recipes/${recipe.id}`, recipe)
+    axios.patch(`${NEW_API_URL}/recipes/${recipe.id}`, recipe)
       .then(() => {
-        axios.get(`${process.env.REACT_APP_API}/recipes`)
+        axios.get(`${NEW_API_URL}/recipes`)
           .then(({ data }) => {
             setRecipes(data);
             setShowChangeModal(false);
@@ -61,7 +62,7 @@ const AdminPage = () => {
 
   const handleOpenChangeModal = (id: number = 0) => {
     setRecipe(prev => ({ ...prev, id }))
-    axios.get(`${process.env.REACT_APP_API}/recipes/${id}`)
+    axios.get(`${NEW_API_URL}/recipes/${id}`)
       .then(({ data }) => {
         setRecipe(data)
       })
@@ -70,9 +71,9 @@ const AdminPage = () => {
 
 
   const handleDelete = () => {
-    axios.delete(`${process.env.REACT_APP_API}/recipes/${recipe.id}`)
+    axios.delete(`${NEW_API_URL}/recipes/${recipe.id}`)
       .then(() => {
-        axios.get(`${process.env.REACT_APP_API}/recipes`)
+        axios.get(`${NEW_API_URL}/recipes`)
           .then(({ data }) => {
             setRecipes(data)
             setShowDeleteModal(false)
@@ -176,9 +177,11 @@ const AdminPage = () => {
         </div>
 
 
-        <Button className="flex-1" color="green" onClick={() => handleUpdatePost()}>Cохранить</Button>
+        <div className="mt-4 flex gap-4">
+          <Button className="flex-1" color="green" onClick={() => handleUpdatePost()}>Cохранить</Button>
 
-        <Button className="flex-1" color="red" onClick={() => setShowChangeModal(false)}>Отменить</Button>
+          <Button className="flex-1" color="red" onClick={() => setShowChangeModal(false)}>Отменить</Button>
+        </div>
       </Modal>
 
       <div className="relative overflow-x-auto shadow-md sm:rounded-lg">

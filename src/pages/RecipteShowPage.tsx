@@ -2,17 +2,18 @@ import axios from 'axios'
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { RecipesListProps } from '../components/Recipes/RecipesList'
+import { NEW_API_URL } from './HomePage'
 
 const RecipteShowPage = () => {
   const [recipe, setrecipe] = useState<RecipesListProps>()
   const { id } = useParams()
 
   useEffect(() => {
-    axios.get(`${process.env.REACT_APP_API}/recipes/${id}`)
+    axios.get(`${NEW_API_URL}/recipes/${id}`)
       .then(({ data }) => {
         setrecipe(data)
       })
-  }, [])
+  }, [id])
 
   return (
     <div className="max-w-4xl mx-auto py-20">
